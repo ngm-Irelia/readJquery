@@ -1,34 +1,11 @@
-/*!
- * jQuery JavaScript Library v3.3.1
- * https://jquery.com/
- *
- * Includes Sizzle.js
- * https://sizzlejs.com/
- *
- * Copyright JS Foundation and other contributors
- * Released under the MIT license
- * https://jquery.org/license
- *
- * Date: 2018-01-20T17:24Z
- */
-
 /**
  * ngm 源码阅读   注释使用///进行标注
  */
 
 ( function( global, factory ) { //biu~
-
 	"use strict"; //biu~
-
 	if ( typeof module === "object" && typeof module.exports === "object" ) { //biu~
 
-		// For CommonJS and CommonJS-like environments where a proper `window`
-		// is present, execute the factory and get jQuery.
-		// For environments that do not have a `window` with a `document`
-		// (such as Node.js), expose a factory as module.exports.
-		// This accentuates the need for the creation of a real `window`.
-		// e.g. var jQuery = require("jquery")(window);
-		// See ticket #14549 for more info.
 		module.exports = global.document ?
 			factory( global, true ) :
 			function( w ) {
@@ -44,54 +21,13 @@
 // Pass this if window is not defined yet
 } )( typeof window !== "undefined" ? window : this, function( window, noGlobal ) {
 
-// Edge <= 12 - 13+, Firefox <=18 - 45+, IE 10 - 11, Safari 5.1 - 9+, iOS 6 - 9.1
-// throw exceptions when non-strict code (e.g., ASP.NET 4.5) accesses strict mode
-// arguments.callee.caller (trac-13335). But as of jQuery 3.0 (2016), strict mode should be common
-// enough that all such attempts are guarded in a try block.
-"use strict";
-
-var arr = [];
-
-var document = window.document;
-
 var getProto = Object.getPrototypeOf;
-
-var slice = arr.slice;
-
-var concat = arr.concat;
-
-var push = arr.push;
-
-var indexOf = arr.indexOf;
-
 var class2type = {};
-
 var toString = class2type.toString;
-
 var hasOwn = class2type.hasOwnProperty;
-
 var fnToString = hasOwn.toString;
-
 var ObjectFunctionString = fnToString.call( Object );
-
 var support = {};
-
-var isFunction = function isFunction( obj ) {
-
-      // Support: Chrome <=57, Firefox <=52
-      // In some browsers, typeof returns "function" for HTML <object> elements
-      // (i.e., `typeof document.createElement( "object" ) === "function"`).
-      // We don't want to classify *any* DOM node as a function.
-      return typeof obj === "function" && typeof obj.nodeType !== "number";
-  };
-
-
-var isWindow = function isWindow( obj ) {
-		return obj != null && obj === obj.window;
-	};
-
-
-
 
 	var preservedScriptAttributes = {
 		type: true,
@@ -116,28 +52,7 @@ var isWindow = function isWindow( obj ) {
 		doc.head.appendChild( script ).parentNode.removeChild( script );
 	}
 
-
-function toType( obj ) {
-	if ( obj == null ) {
-		return obj + "";
-	}
-
-	// Support: Android <=2.3 only (functionish RegExp)
-	return typeof obj === "object" || typeof obj === "function" ?
-		class2type[ toString.call( obj ) ] || "object" :
-		typeof obj; /// ngm返回基本数据类型
-}
-/* global Symbol */
-// Defining this global in .eslintrc.json would create a danger of using the global
-// unguarded in another place, it seems safer to define global only for this module
-
-
-
-var
-	version = "3.3.1",
-
-	// Define a local copy of jQuery
-	jQuery = function( selector, context ) {
+var jQuery = function( selector, context ) {
 
 		// The jQuery object is actually just the init constructor 'enhanced'
 		// Need init if jQuery is called (just allow error to be thrown if not included)
@@ -149,14 +64,6 @@ var
 	rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
 
 jQuery.fn = jQuery.prototype = {
-
-	// The current version of jQuery being used
-	jquery: version,
-
-	constructor: jQuery,
-
-	// The default length of a jQuery object is 0
-	length: 0,
 
 	toArray: function() {
 		return slice.call( this );
@@ -187,11 +94,6 @@ jQuery.fn = jQuery.prototype = {
 
 		// Return the newly-formed element set
 		return ret;
-	},
-
-	// Execute a callback for every element in the matched set.
-	each: function( callback ) {
-		return jQuery.each( this, callback );
 	},
 
 	map: function( callback ) {
@@ -298,7 +200,6 @@ jQuery.extend = jQuery.fn.extend = function() {
 	return target;
 };
 
-/// ngm 在jQuery中扩展如下的方法和属性
 jQuery.extend( {
 
 	// Unique for each copy of jQuery on the page
@@ -349,27 +250,6 @@ jQuery.extend( {
 	// Evaluates a script in a global context
 	globalEval: function( code ) {
 		DOMEval( code );
-	},
-
-	each: function( obj, callback ) {
-		var length, i = 0;
-
-		if ( isArrayLike( obj ) ) {
-			length = obj.length;
-			for ( ; i < length; i++ ) {
-				if ( callback.call( obj[ i ], i, obj[ i ] ) === false ) {
-					break;
-				}
-			}
-		} else {
-			for ( i in obj ) {
-				if ( callback.call( obj[ i ], i, obj[ i ] ) === false ) {
-					break;
-				}
-			}
-		}
-
-		return obj;
 	},
 
 	// Support: Android <=4.0 only
@@ -486,22 +366,6 @@ function( i, name ) {
 	class2type[ "[object " + name + "]" ] = name.toLowerCase();
 } );
 
-function isArrayLike( obj ) {
-
-	// Support: real iOS 8.2 only (not reproducible in simulator)
-	// `in` check used to prevent JIT error (gh-2145)
-	// hasOwn isn't used here due to false negatives
-	// regarding Nodelist length in IE
-	var length = !!obj && "length" in obj && obj.length,
-		type = toType( obj );
-
-	if ( isFunction( obj ) || isWindow( obj ) ) {
-		return false;
-	}
-
-	return type === "array" || length === 0 ||
-		typeof length === "number" && length > 0 && ( length - 1 ) in obj;
-}
 var Sizzle =
 /*!
  * Sizzle CSS Selector Engine v2.3.3
@@ -2902,10 +2766,7 @@ jQuery.fn.extend( {
 } );
 
 
-// Initialize a jQuery object
 
-
-// A central reference to the root jQuery(document)
 var rootjQuery,
 
 	// A simple way to check for HTML strings
@@ -3206,28 +3067,7 @@ function createOptions( options ) {
 	return object;
 }
 
-/*
- * Create a callback list using the following parameters:
- *
- *	options: an optional list of space-separated options that will change how
- *			the callback list behaves or a more traditional option object
- *
- * By default a callback list will act like an event callback list and can be
- * "fired" multiple times.
- *
- * Possible options:
- *
- *	once:			will ensure the callback list can only be fired once (like a Deferred)
- *
- *	memory:			will keep track of previous values and will call any callback added
- *					after the list has been fired right away with the latest "memorized"
- *					values (like a Deferred)
- *
- *	unique:			will ensure a callback can only be added once (no duplicate in the list)
- *
- *	stopOnFalse:	interrupt callings when a callback returns false
- *
- */
+
 jQuery.Callbacks = function( options ) {
 
 	// Convert options from String-formatted to Object-formatted if needed
@@ -3421,7 +3261,6 @@ jQuery.Callbacks = function( options ) {
 
 	return self;
 };
-
 
 function Identity( v ) {
 	return v;
@@ -4161,18 +4000,6 @@ var dataPriv = new Data();
 
 var dataUser = new Data();
 
-
-
-//	Implementation Summary
-//
-//	1. Enforce API surface and semantic compatibility with 1.9.x branch
-//	2. Improve the module's maintainability by reducing the storage
-//		paths to a single mechanism.
-//	3. Use the same single mechanism to support "private" and "user" data.
-//	4. _Never_ expose "private" data to user code (TODO: Drop _data, _removeData)
-//	5. Avoid exposing implementation details on user objects (eg. expando properties)
-//	6. Provide a clear path for implementation upgrade to WeakMap in 2014
-
 var rbrace = /^(?:\{[\w\W]*\}|\[[\w\W]*\])$/,
 	rmultiDash = /[A-Z]/g;
 
@@ -4869,13 +4696,7 @@ var
 	rmouseEvent = /^(?:mouse|pointer|contextmenu|drag|drop)|click/,
 	rtypenamespace = /^([^.]*)(?:\.(.+)|)/;
 
-function returnTrue() {
-	return true;
-}
 
-function returnFalse() {
-	return false;
-}
 
 // Support: IE <=9 only
 // See #13393 for more info
@@ -5511,14 +5332,7 @@ jQuery.each( {
 	}
 }, jQuery.event.addProp );
 
-// Create mouseenter/leave events using mouseover/out and event-time checks
-// so that event delegation works in jQuery.
-// Do the same for pointerenter/pointerleave and pointerover/pointerout
-//
-// Support: Safari 7 only
-// Safari sends mouseenter too often; see:
-// https://bugs.chromium.org/p/chromium/issues/detail?id=470258
-// for the description of the bug (it existed in older Chrome versions as well).
+
 jQuery.each( {
 	mouseenter: "mouseover",
 	mouseleave: "mouseout",
@@ -10225,9 +10039,6 @@ jQuery.fn.extend( {
 	}
 } );
 
-
-
-
 jQuery.fn.extend( {
 
 	bind: function( types, data, fn ) {
@@ -10249,141 +10060,13 @@ jQuery.fn.extend( {
 	}
 } );
 
-// Bind a function to a context, optionally partially applying any
-// arguments.
-// jQuery.proxy is deprecated to promote standards (specifically Function#bind)
-// However, it is not slated for removal any time soon
-
-/**
- * ngm 10255
- * @parmas context 函数|对象
- * @parmas name 对象|字符串（函数名string）
- * @return jquery
- */
-jQuery.proxy = function( fn, context ) {
-	var tmp, args, proxy;
-
-	if ( typeof context === "string" ) { /// (context, name)的使用方式！！
-		tmp = fn[ context ]; /// 直接在这调用了
-		context = fn;  /// context = fn 是个对象
-		fn = tmp;  /// fn = tmp = fn[ context ] 是个函数 
-	} /// 哈哈，听过这个又变成了原来的  (func, context) 参数形式
-
-	// Quick check to determine if target is callable, in the spec
-	// this throws a TypeError, but we will just return undefined.
-	if ( !isFunction( fn ) ) {   /// ok 如果不是func，返回好了
-		return undefined;
-	}
-
-	// Simulated bind
-	args = slice.call( arguments, 2 );  ///学习这种截取参数的方式
-	proxy = function() {
-		return fn.apply( context || this, args.concat( slice.call( arguments ) ) );
-	};
-
-	// Set the guid of unique handler to the same of original handler, so it can be removed
-	proxy.guid = fn.guid = fn.guid || jQuery.guid++;
-
-	return proxy;
-};
-
-/**
- * 暂停jQuery入口函数ready的执行
- * 
- * params hold  = true 暂停jQuery入口函数ready的执行 ;  false 解除暂停
- */
-jQuery.holdReady = function( hold ) {
-	if ( hold ) {
-		jQuery.readyWait++;
-	} else {
-		jQuery.ready( true );
-	}
-};
-jQuery.isArray = Array.isArray;  /// 哦吼,直接调用的 Array的isArray方法
 jQuery.parseJSON = JSON.parse;
 jQuery.nodeName = nodeName;
-jQuery.isFunction = isFunction;
+
 jQuery.isWindow = isWindow;
 jQuery.camelCase = camelCase;
-jQuery.type = toType;
 
 jQuery.now = Date.now;
-
-//判断指定参数是否是一个数字值
-jQuery.isNumeric = function( obj ) {
-
-	// As of jQuery 3.0, isNumeric is limited to
-	// strings and numbers (primitives or objects)
-	// that can be coerced to finite numbers (gh-2662)
-	var type = jQuery.type( obj );
-	return ( type === "number" || type === "string" ) &&
-
-		// parseFloat NaNs numeric-cast false positives ("")
-		// ...but misinterprets leading-number strings, particularly hex literals ("0x...")
-		// subtraction forces infinities to NaN
-		!isNaN( obj - parseFloat( obj ) );
-};
-
-
-
-
-// Register as a named AMD module, since jQuery can be concatenated with other
-// files that may use define, but not via a proper concatenation script that
-// understands anonymous AMD modules. A named AMD is safest and most robust
-// way to register. Lowercase jquery is used because AMD module names are
-// derived from file names, and jQuery is normally delivered in a lowercase
-// file name. Do this after creating the global so that if an AMD module wants
-// to call noConflict to hide this version of jQuery, it will work.
-
-// Note that for maximum portability, libraries that are not jQuery should
-// declare themselves as anonymous modules, and avoid setting a global if an
-// AMD loader is present. jQuery is a special case. For more information, see
-// https://github.com/jrburke/requirejs/wiki/Updating-existing-libraries#wiki-anon
-
-if ( typeof define === "function" && define.amd ) {
-	define( "jquery", [], function() {
-		return jQuery;
-	} );
-}
-
-
-
-
-var
-
-	// Map over jQuery in case of overwrite
-	_jQuery = window.jQuery,
-
-	// Map over the $ in case of overwrite
-	_$ = window.$; /// ngm 这里把初始用window.$(未定义undefined) 传给了 _$ = undefined;
-/**
- * ngm 
- * 释放 jQuery 对 $ 变量的控制。
- * @parmas deep 布尔值。指示是否允许彻底将 jQuery 变量还原。
- * @return jquery
- */
-jQuery.noConflict = function( deep ) { 
-	if ( window.$ === jQuery ) {
-		window.$ = _$;  /// 在这里 释放 ！！ window.$ = _$ = undefined;
-	}
-	console.log($)
-	console.log(_$)
-	if ( deep && window.jQuery === jQuery ) { 
-		window.jQuery = _jQuery;
-	}
-
-	return jQuery;
-};
-
-// Expose jQuery and $ identifiers, even in AMD
-// (#7102#comment:10, https://github.com/jquery/jquery/pull/557)
-// and CommonJS for browser emulators (#13566)
-if ( !noGlobal ) {
-	window.jQuery = window.$ = jQuery;     ///ngm 使用 jQuery 和 $ 是一样的
-}
-
-
-
 
 return jQuery;
 } );
