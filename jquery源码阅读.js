@@ -73,7 +73,7 @@ var isFunction = function isFunction( obj ) {
 
 
 /**
- * ngm 79
+ * ngm 489
  * 判断对象是否为类数组
  * @param {*} obj 
  * @returns boolean
@@ -125,60 +125,60 @@ jQuery.each(
  */
 
 jQuery.fn = jQuery.prototype = {
-    /**
-     * ngm 193
-     * jQuery.each
-     * 通过 jQuery.fn 调用了jQuery上面的each方法
-     * 然后 jQuery上面的each方法 是 通过 jQuery.extend() 扩展到jquery上面的。
-     */
-    each: function( callback ) {
-        return jQuery.each( this, callback );
-    },
+  /**
+   * ngm 193
+   * jQuery.each
+   * 通过 jQuery.fn 调用了jQuery上面的each方法
+   * 然后 jQuery上面的each方法 是 通过 jQuery.extend() 扩展到jquery上面的。
+   */
+  each: function( callback ) {
+      return jQuery.each( this, callback );
+  },
 
-    /**
-     * ngm 156
-     * 用例：$("li").toArray()
-     * 可把类数组 转换为 数组， 内部使用的 slice ---- 也就是 数组本身的 slice
-     */
-    toArray: function() {
-		return slice.call( this );
-    },
+  /**
+   * ngm 156
+   * 用例：$("li").toArray()
+   * 可把类数组 转换为 数组， 内部使用的 slice ---- 也就是 数组本身的 slice
+   */
+  toArray: function() {
+    return slice.call( this );
+  },
 
-    /**
-     * ngm 162
-     * 获得 数组中 指定位置的数据
-     * @param {*} num 数组下标  若为负数，则逆向查找
-     */
-    get: function( num ) {
+  /**
+   * ngm 162
+   * 获得 数组中 指定位置的数据
+   * @param {*} num 数组下标  若为负数，则逆向查找
+   */
+  get: function( num ) {
 
-		// Return all the elements in a clean array
-		if ( num == null ) {
-			return slice.call( this );
-		}
+  // Return all the elements in a clean array
+  if ( num == null ) {
+    return slice.call( this );
+  }
 
-		// Return just the one element from the set
-		return num < 0 ? this[ num + this.length ] : this[ num ];
-    },
-    
-    /**
-     * ngm 400
-     * 合并两个数组 ， 会把数组2 中的值 合并到 数组1中， 使用的for循环~~
-     * @param {*} first 数组1
-     * @param {*} second 数组2
-     */
-    merge: function( first, second ) {
-		var len = +second.length,
-			j = 0,
-			i = first.length;
+  // Return just the one element from the set
+  return num < 0 ? this[ num + this.length ] : this[ num ];
+  },
+  
+  /**
+   * ngm 400
+   * 合并两个数组 ， 会把数组2 中的值 合并到 数组1中， 使用的for循环~~
+   * @param {*} first 数组1
+   * @param {*} second 数组2
+   */
+  merge: function( first, second ) {
+    var len = +second.length,
+      j = 0,
+      i = first.length;
 
-		for ( ; j < len; j++ ) {
-			first[ i++ ] = second[ j ];
-		}
+    for ( ; j < len; j++ ) {
+      first[ i++ ] = second[ j ];
+    }
 
-		first.length = i;
+    first.length = i;
 
-		return first;
-	},
+    return first;
+  },
     
 }
 
