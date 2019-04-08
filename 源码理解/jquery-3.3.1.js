@@ -178,10 +178,11 @@ jQuery.fn = jQuery.prototype = {
 	// Take an array of elements and push it onto the stack
 	// (returning the new matched element set)
 	pushStack: function( elems ) {
-
+		console.log("in pushStack, show elems");
+		console.log(elems);
 		// Build a new jQuery matched element set
 		var ret = jQuery.merge( this.constructor(), elems );
-
+		console.log(ret);
 		// Add the old object onto the stack (as a reference)
 		ret.prevObject = this;
 
@@ -298,7 +299,7 @@ jQuery.extend = jQuery.fn.extend = function() {
 	return target;
 };
 
-/// ngm 在jQuery中扩展如下的方法和属性
+///jQuery中扩展如下的方法和属性
 jQuery.extend( {
 
 	// Unique for each copy of jQuery on the page
@@ -2779,7 +2780,7 @@ var dir = function( elem, dir, until ) {
 
 	while ( ( elem = elem[ dir ] ) && elem.nodeType !== 9 ) {
 		if ( elem.nodeType === 1 ) {
-			if ( truncate && jQuery( elem ).is( until ) ) {
+			if ( truncate && jQuery( elem ).is( until ) ) { //ok~这里实现功能的时候，调用了其定义好的各种api
 				break;
 			}
 			matched.push( elem );
@@ -3189,7 +3190,7 @@ jQuery.each( {
 				matched.reverse();
 			}
 		}
-
+		console.log("哈啊哈，我不能立即执行，我是当调用具体函数的时候，才执行呢")
 		return this.pushStack( matched );
 	};
 } );

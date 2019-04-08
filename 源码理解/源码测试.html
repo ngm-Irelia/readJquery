@@ -6,28 +6,40 @@
 		<script src="jquery-3.3.1.js"></script>
 	</head>
 	<body>
-		
-		<p>这是一个段落。</p>
-		<button>测试 jQuery</button>
+
+		<p>这是一个段落。</p> 
+
+		<button id="test1">jQuery遍历祖先</button>
+		<button id="test2">模拟遍历祖先</button>
+
+		<ul class="level-1">
+			<li class="item-i">I</li>
+			<li class="item-ii">II
+				<ul class="level-2">
+					<li class="item-a">A</li>
+					<li class="item-b">B
+						<ul class="level-3">
+							<li class="item-1">1</li>
+							<li class="item-2">2</li>
+							<li class="item-3">3</li>
+						</ul>
+					</li>
+					<li class="item-c">C</li>
+				</ul>
+			</li>
+			<li class="item-iii">III</li>
+		</ul>
 
 
-		<script>
-			//1. noConflict()
-			/**
-			 * ngm 
-			 * 释放 jQuery 对 $ 变量的控制。
-			 * @parmas deep 布尔值。指示是否允许彻底将 jQuery 变量还原。
-			 * @return jquery
-			 */
-			$.noConflict();
-			jQuery(document).ready(function(){
-			  jQuery("button").click(function(){
-				jQuery("p").text("jQuery 仍在运行！");
-			  });
-			});
-			
-			
-			
+		<script type="text/javascript">
+			  
+
+			$("#test1").click(function() {
+				var item = $('.item-1');
+				console.log(item.next()); 
+			})
+
+			 
 		</script>
 	</body>
 </html>
