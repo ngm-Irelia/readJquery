@@ -2860,13 +2860,11 @@
 					}
 					return this;
 				},
-
 				// Call all the callbacks with the given arguments
 				fire: function () {
 					self.fireWith(this, arguments);
 					return this;
 				},
-
 				// To know if the callbacks have already been called at least once
 				fired: function () {
 					return !!fired;
@@ -2876,12 +2874,9 @@
 		return self;
 	};
 
-
 	function adoptValue(value, resolve, reject, noValue) {
 		var method;
-
 		try {
-
 			// Check for promise aspect first to privilege synchronous behavior
 			if (value && isFunction((method = value.promise))) {
 				method.call(value).done(resolve).fail(reject);
@@ -2911,10 +2906,8 @@
 	}
 
 	jQuery.extend({
-
 		Deferred: function (func) {
 			var tuples = [
-
 				// action, add listener, callbacks,
 				// ... .then handlers, argument index, [final state]
 				["notify", "progress", jQuery.Callbacks("memory"),
@@ -3211,20 +3204,15 @@
 		// Deferred helper
 		when: function (singleValue) {
 			var
-
 				// count of uncompleted subordinates
 				remaining = arguments.length,
-
 				// count of unprocessed arguments
 				i = remaining,
-
 				// subordinate fulfillment data
 				resolveContexts = Array(i),
 				resolveValues = slice.call(arguments),
-
 				// the master Deferred
 				master = jQuery.Deferred(),
-
 				// subordinate callback factory
 				updateFunc = function (i) {
 					return function (value) {
@@ -3272,17 +3260,11 @@
 		}
 	};
 
-
-
-
 	jQuery.readyException = function (error) {
 		window.setTimeout(function () {
 			throw error;
 		});
 	};
-
-
-
 
 	// The deferred used on DOM ready
 	var readyList = jQuery.Deferred();
@@ -3303,30 +3285,23 @@
 	};
 
 	jQuery.extend({
-
 		// Is the DOM ready to be used? Set to true once it occurs.
 		isReady: false,
-
 		// A counter to track how many items to wait for before
 		// the ready event fires. See #6781
 		readyWait: 1,
-
 		// Handle when the DOM is ready
 		ready: function (wait) {
-
 			// Abort if there are pending holds or we're already ready
 			if (wait === true ? --jQuery.readyWait : jQuery.isReady) {
 				return;
 			}
-
 			// Remember that the DOM is ready
 			jQuery.isReady = true;
-
 			// If a normal DOM Ready event fired, decrement, and wait if need be
 			if (wait !== true && --jQuery.readyWait > 0) {
 				return;
 			}
-
 			// If there are functions bound, to execute
 			readyList.resolveWith(document, [jQuery]);
 		}
@@ -3359,9 +3334,6 @@
 		// A fallback to window.onload, that will always work
 		window.addEventListener("load", completed);
 	}
-
-
-
 
 	// Multifunctional method to get and set values of a collection
 	// The value/s can optionally be executed if it's a function
@@ -9533,7 +9505,6 @@
 
 		jQuery.fn[method] = function (val) {
 			return access(this, function (elem, method, val) {
-
 				// Coalesce documents and windows
 				var win;
 				if (isWindow(elem)) {
@@ -9541,17 +9512,14 @@
 				} else if (elem.nodeType === 9) {
 					win = elem.defaultView;
 				}
-
 				if (val === undefined) {
 					return win ? win[prop] : elem[method];
 				}
-
 				if (win) {
 					win.scrollTo(
 						!top ? val : win.pageXOffset,
 						top ? val : win.pageYOffset
 					);
-
 				} else {
 					elem[method] = val;
 				}
@@ -9570,7 +9538,6 @@
 			function (elem, computed) {
 				if (computed) {
 					computed = curCSS(elem, prop);
-
 					// If curCSS returns percentage, fallback to offset
 					return rnumnonpx.test(computed) ?
 						jQuery(elem).position()[prop] + "px" :
@@ -9585,7 +9552,6 @@
 	jQuery.each({ Height: "height", Width: "width" }, function (name, type) {
 		jQuery.each({ padding: "inner" + name, content: type, "": "outer" + name },
 			function (defaultExtra, funcName) {
-
 				// Margin is only for outerHeight, outerWidth
 				jQuery.fn[funcName] = function (margin, value) {
 					var chainable = arguments.length && (defaultExtra || typeof margin !== "boolean"),
@@ -9593,9 +9559,7 @@
 
 					return access(this, function (elem, type, value) {
 						var doc;
-
 						if (isWindow(elem)) {
-
 							// $( window ).outerWidth/Height return w/h including scrollbars (gh-1729)
 							return funcName.indexOf("outer") === 0 ?
 								elem["inner" + name] :
@@ -9605,7 +9569,6 @@
 						// Get document width or height
 						if (elem.nodeType === 9) {
 							doc = elem.documentElement;
-
 							// Either scroll[Width/Height] or offset[Width/Height] or client[Width/Height],
 							// whichever is greatest
 							return Math.max(
@@ -9614,12 +9577,9 @@
 								doc["client" + name]
 							);
 						}
-
 						return value === undefined ?
-
 							// Get width or height on the element, requesting but not forcing parseFloat
 							jQuery.css(elem, type, extra) :
-
 							// Set width or height on the element
 							jQuery.style(elem, type, value, extra);
 					}, type, chainable ? margin : undefined, chainable);
@@ -9627,12 +9587,10 @@
 			});
 	});
 
-
 	jQuery.each(("blur focus focusin focusout resize scroll click dblclick " +
 		"mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave " +
 		"change select submit keydown keypress keyup contextmenu").split(" "),
 		function (i, name) {
-
 			// Handle event binding
 			jQuery.fn[name] = function (data, fn) {
 				return arguments.length > 0 ?
@@ -9648,19 +9606,16 @@
 	});
 
 	jQuery.fn.extend({
-
 		bind: function (types, data, fn) {
 			return this.on(types, null, data, fn);
 		},
 		unbind: function (types, fn) {
 			return this.off(types, null, fn);
 		},
-
 		delegate: function (selector, types, data, fn) {
 			return this.on(types, selector, data, fn);
 		},
 		undelegate: function (selector, types, fn) {
-
 			// ( namespace ) or ( selector, types [, fn] )
 			return arguments.length === 1 ?
 				this.off(selector, "**") :
@@ -9670,10 +9625,8 @@
 
 	jQuery.parseJSON = JSON.parse;
 	jQuery.nodeName = nodeName;
-
 	jQuery.isWindow = isWindow;
 	jQuery.camelCase = camelCase;
-
 	jQuery.now = Date.now;
 
 	return jQuery;
